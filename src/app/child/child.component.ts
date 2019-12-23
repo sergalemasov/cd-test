@@ -22,7 +22,7 @@ export class ChildComponent implements AfterViewInit {
 
             fromEvent(this.scroller.nativeElement, 'wheel')
                 .pipe(
-                    tap(() => console.log('native scrolled')),
+                    tap(() => console.log('CHILD: native scrolled')),
                     tap(() => counter++),
                     filter(() => counter >= this.times),
                     tap(() => counter = 0)

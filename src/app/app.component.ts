@@ -10,10 +10,10 @@ export class AppComponent implements DoCheck {
     times = 10;
 
     ngDoCheck() {
-        console.log('do check');
+        console.log('PARENT: change detection started');
     }
 
     onScroll() {
-        console.log(`scrolled ${this.times} times`);
+        console.log(`PARENT: scrolled ${this.times} times`);
     }
 }
