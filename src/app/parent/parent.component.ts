@@ -16,4 +16,9 @@ export class ParentComponent implements DoCheck {
     onScroll() {
         console.log(`PARENT: scrolled ${this.times} times`);
     }
+
+    parentGetter() {
+        console.log('PARENT: dirty checked');
+        return '';
+    }
 }

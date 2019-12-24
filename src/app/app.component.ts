@@ -10,4 +10,9 @@ export class AppComponent implements DoCheck {
     ngDoCheck() {
         console.log('ROOT: checked');
     }
+
+    rootGetter() {
+        console.log('ROOT: dirty checked');
+        return '';
+    }
 }

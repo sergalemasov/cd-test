@@ -22,6 +22,7 @@ export class ChildComponent implements AfterViewInit {
     @Input() times: number;
     @ViewChild('scroller') scroller: ElementRef;
     @ViewChild('mousemover') mousemover: ElementRef;
+    @ViewChild('clicker') clicker: ElementRef;
     @Output() scrollTimes = new EventEmitter<void>();
 
     constructor(private ngZone: NgZone) {}
@@ -39,6 +40,9 @@ export class ChildComponent implements AfterViewInit {
                 )
                 .subscribe(() => this.ngZone.run(() => this.scrollTimes.emit()));
         });
+
+        fromEvent(this.clicker.nativeElement, 'click')
+            .subscribe();
 
         fromEvent(this.mousemover.nativeElement, 'mousemove')
             .subscribe();
