@@ -7,7 +7,8 @@ import {
     NgZone,
     Output,
     EventEmitter,
-    Input
+    Input,
+    DoCheck
 } from '@angular/core';
 import {fromEvent} from 'rxjs';
 import {tap, filter} from 'rxjs/operators';
@@ -18,7 +19,7 @@ import {tap, filter} from 'rxjs/operators';
     styleUrls: ['./child.component.less'],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ChildComponent implements AfterViewInit {
+export class ChildComponent implements DoCheck, AfterViewInit {
     @Input() times: number;
     @ViewChild('scroller') scroller: ElementRef;
     @ViewChild('mousemover') mousemover: ElementRef;
@@ -27,6 +28,9 @@ export class ChildComponent implements AfterViewInit {
     constructor(private ngZone: NgZone) {}
 
     ngAfterViewInit() {
+        fromEvent(this.mousemover.nativeElement, 'mousemove')
+            .subscribe(() => console.log('CHILD: mousemove'));
+
         this.ngZone.runOutsideAngular(() => {
             let counter = 0;
 
@@ -39,9 +43,6 @@ export class ChildComponent implements AfterViewInit {
                 )
                 .subscribe(() => this.ngZone.run(() => this.scrollTimes.emit()));
         });
-
-        fromEvent(this.mousemover.nativeElement, 'mousemove')
-            .subscribe(() => console.log('CHILD: mousemove'));
     }
 
     ngDoCheck() {
